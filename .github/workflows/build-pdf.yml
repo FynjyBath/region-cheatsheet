@@ -16,6 +16,8 @@ jobs:
       # 1. Клонируем репозиторий
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          persist-credentials: true
 
       # 2. Компиляция LaTeX
       - name: Compile LaTeX

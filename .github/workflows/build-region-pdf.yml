@@ -5,6 +5,7 @@ on:
     branches: [ main ]
     paths-ignore:
       - 'region.pdf'
+      - 'zakl.pdf'
   workflow_dispatch:
 
 # ВАЖНО: дать токену право пушить в репозиторий

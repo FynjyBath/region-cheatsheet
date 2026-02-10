@@ -1,0 +1,44 @@
+name: Build LaTeX PDF
+
+on:
+  push:
+    branches: [ main ]
+    paths-ignore:
+      - 'region.pdf'
+      - 'zakl.pdf'
+  workflow_dispatch:
+
+# ВАЖНО: дать токену право пушить в репозиторий
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Compile LaTeX
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: zakl.tex
+          # latexmk_args больше не поддерживается — используем args
+          args: -pdf -file-line-error -halt-on-error -interaction=nonstopmode
+
+      - name: Upload PDF as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: zakl-pdf
+          path: zakl.pdf
+
+      - name: Commit PDF back to repo
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add zakl.pdf
+          git commit -m "Auto-build zakl.pdf" || echo "No changes to commit"
+          git push origin HEAD:main

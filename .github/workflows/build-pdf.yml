@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main ]
     paths-ignore:
-      - 'main.pdf'
+      - 'region.pdf'
   workflow_dispatch:
 
 # ВАЖНО: дать токену право пушить в репозиторий
@@ -24,20 +24,20 @@ jobs:
       - name: Compile LaTeX
         uses: xu-cheng/latex-action@v2
         with:
-          root_file: main.tex
+          root_file: region.tex
           # latexmk_args больше не поддерживается — используем args
           args: -pdf -file-line-error -halt-on-error -interaction=nonstopmode
 
       - name: Upload PDF as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: main-pdf
-          path: main.pdf
+          name: region-pdf
+          path: region.pdf
 
       - name: Commit PDF back to repo
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add main.pdf
-          git commit -m "Auto-build main.pdf" || echo "No changes to commit"
+          git add region.pdf
+          git commit -m "Auto-build region.pdf" || echo "No changes to commit"
           git push origin HEAD:main

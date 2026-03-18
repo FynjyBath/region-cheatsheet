@@ -141,9 +141,19 @@ freopen("output.out", "w", stdout);
 
 Видно, что cout.tie(0) бесполезно. ВЫУЧИТЕ другие два ускорения, ведь они в 3 раза улучшают время, и не каждая среда может подсказать.
 
+\begin{figure}[h]
 \center{\includegraphics{images/image1.png}}
+\caption{image1}
+\label{ris:image}
+\end{figure}
 
 Правильно расставляйте типы переменных, т. к. int занимает меньше времени на создание.
+
+\begin{figure}[h]
+\center{\includegraphics{images/image2.png}}
+\caption{image2}
+\label{ris:image}
+\end{figure}
 
 Сделать статические массивы вместо векторов. При этом в местах, где vector всё же используется как стек, перед использованием сделать v.reserve(MAXN).
 
@@ -169,6 +179,12 @@ freopen("output.out", "w", stdout);
 Пытаться загнать прагмы только тогда, когда вам нечего больше делать!
 
 По возможности избавляться от любых делений и остатков по модулю. Например, взятие остатка по модулю, когда пишешь хэш, работает дольше, чем if сумма больше модуля.
+
+\begin{figure}[h]
+\center{\includegraphics{images/image3.png}}
+\caption{image3}
+\label{ris:image}
+\end{figure}
 
 Путем проб и ошибок стало понятно, что переписывать решение в тернарные операторы для ускорения по времени бессмысленно.
 
